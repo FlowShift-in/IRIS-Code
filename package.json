@@ -21,6 +21,8 @@
   "dependencies": {
     "@langchain/core": "^1.1.48",
     "@langchain/google": "^0.1.12",
+    "fs-extra": "^11.3.5",
+    "glob": "^13.0.6",
     "langchain": "^1.4.4"
   }
 }
