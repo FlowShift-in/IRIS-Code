@@ -1,5 +1,9 @@
 import { render } from "ink";
 import InputBox from "./InputBox.js";
+import React from "react";
 
-render(<InputBox />);
+const App = () => {
+  return render(React.createElement(InputBox));
+};
 
+export default App;

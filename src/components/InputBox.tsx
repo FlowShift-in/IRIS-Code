@@ -13,10 +13,6 @@ const InputBox = () => {
       setPrompt((prev) => prev.slice(0, -1));
     }
 
-    if (key.return) {
-      console.log(prompt);
-    }
-
     if (input) {
       setPrompt((prev) => prev + input);
     }
