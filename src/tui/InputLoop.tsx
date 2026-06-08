@@ -9,17 +9,18 @@ const InputLoop = () => {
       process.exit(0);
     }
 
-    if (input === "k") {
+    if (input === "a") {
       setCounter(counter + 1);
-    } else if (input === "j") {
+    } else if (input === "b") {
       setCounter(counter - 1);
     }
   });
 
   return (
     <Box flexDirection="column" margin={1}>
+      <Text color="white">Hey , what's up?</Text>
       <Box borderStyle="round" flexDirection="row" paddingX={1}>
-        <Text color="white">{counter}</Text>
+        <Text color="green">{counter}</Text>
       </Box>
     </Box>
   );
