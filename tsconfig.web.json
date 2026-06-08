@@ -1,0 +1,83 @@
+{
+  // ─── TSCONFIG.TUI.JSON ────────────────────────────────────────────────────────
+  // Compiles: src/tui/  only
+  // These files use React JSX via Ink — <Box>, <Text>, useInput, useState etc.
+  // .tsx files: App.tsx, ChatView.tsx, StatusBar.tsx, ApprovalBar.tsx
+  // .ts  files: index.ts (calls render()), hooks/, types/
+  //
+  // Build:  npx tsc -p tsconfig.tui.json
+  // Watch:  npx tsc -p tsconfig.tui.json --watch
+  // Dev:    npx tsx watch src/tui/App.tsx   (fastest — no compile step)
+  //
+  // Required packages:
+  //   npm i ink react
+  //   npm i -D @types/react typescript
+  // ─────────────────────────────────────────────────────────────────────────────
+  "extends": "./tsconfig.json",
+
+  "compilerOptions": {
+    // ── I/O ──────────────────────────────────────────────────────────────────────
+    // rootDir = src/tui/ only. outDir mirrors into dist/src/tui/
+    // dist/src/tui/index.js is what bin/iris-code.js imports at runtime.
+    "rootDir": "./src/tui",
+    "outDir": "./dist/src/tui",
+
+    // ── JSX ──────────────────────────────────────────────────────────────────────
+    // react-jsx: uses the automatic JSX runtime (React 17+ / React 19).
+    // You do NOT need to write  import React from 'react'  at the top of
+    // every .tsx file. TypeScript injects it automatically.
+    //
+    // jsxImportSource: tells TS where to get JSX runtime from.
+    // Must match what Ink uses — Ink 5+ requires React 19, so "react" is correct.
+    //
+    // DO NOT use:
+    //   "preserve"  → leaves JSX for another tool (Vite/Babel). We have neither.
+    //   "react"     → old runtime, requires  import React from 'react'  everywhere.
+    //   "react-native" → wrong target (mobile renderer).
+    "jsx": "react-jsx",
+    "jsxImportSource": "react",
+
+    // ── Types ─────────────────────────────────────────────────────────────────────
+    // Include both node and react types.
+    // node:  needed because Ink components can access process.stdout, process.env
+    // react: picks up @types/react (JSX intrinsics, React.FC, useState etc.)
+    //
+    // We do NOT include "dom" — Ink runs in terminal, not a browser.
+    // Adding "dom" would expose window/document and cause false positives.
+    "types": ["node", "react"],
+
+    // ── Lib ──────────────────────────────────────────────────────────────────────
+    // Keep base ES2022. Do NOT add "DOM" here — same reason as above.
+    // Ink handles all terminal I/O itself; we don't need browser lib types.
+    "lib": ["ES2022"]
+
+    // ── Ink-specific notes ────────────────────────────────────────────────────────
+    // 1. All component files that contain <Box> or <Text> MUST be .tsx
+    //    Files that are pure logic (hooks, types) can stay .ts
+    //
+    // 2. All relative imports need .js extension even in .tsx source:
+    //    import ChatView from './ChatView.js'   ✅
+    //    import ChatView from './ChatView'       ❌ fails at runtime with NodeNext
+    //
+    // 3. Never use:  import ReactDOM from 'react-dom'
+    //    Ink has its own renderer. react-dom is for browsers only.
+    //
+    // 4. The render() call (in src/tui/index.ts) looks like:
+    //    import { render } from 'ink'
+    //    import App from './App.js'
+    //    render(<App />)
+    //    That file must be .tsx (not .ts) because it contains JSX.
+  },
+
+  // ── What to compile ───────────────────────────────────────────────────────────
+  // Only src/tui/ — agents, cli, bin are handled by tsconfig.node.json.
+  // All .ts and .tsx files inside src/tui/ are picked up automatically.
+  "include": ["src/tui"],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "src/agents", // node-only — no JSX
+    "src/cli", // node-only — no JSX
+    "bin" // entry point — no JSX
+  ]
+}
