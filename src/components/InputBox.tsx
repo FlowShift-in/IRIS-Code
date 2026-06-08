@@ -9,14 +9,6 @@ const InputBox = () => {
     if ((key.ctrl && input.toLowerCase() === "c") || key.escape) {
       process.exit(0);
     }
-
-    // if (key.backspace || key.delete) {
-    //   setPrompt((prev) => prev.slice(0, -1));
-    // }
-
-    // if (input && !key.return && !key.escape) {
-    //   setPrompt((prev) => prev + input);
-    // }
   });
 
   return (
