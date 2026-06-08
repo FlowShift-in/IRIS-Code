@@ -1,5 +1,5 @@
-const App = () => {
-  return <div>App</div>;
-};
+import { render } from "ink";
+import InputBox from "./InputBox.js";
 
-export default App;
+render(<InputBox />);
+
