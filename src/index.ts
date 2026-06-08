@@ -1,5 +1,8 @@
 const index = () => {
-  console.log("Hello World");
+  console.clear();
+  console.log("Welcome to IRIS AI Coding Agent");
+  console.log("----------------------------------");
+  console.log("");
 };
 
 index();
