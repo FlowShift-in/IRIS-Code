@@ -5,20 +5,20 @@ const InputLoop: React.FC = () => {
   const [value, setValue] = useState("");
 
   // Capture single key presses (not full lines)
-  useInput((key, event) => {
-    if (key === "escape") {
+  useInput((input, key) => {
+    if (key.escape) {
       // Optionally clear input when Escape is pressed
       setValue("");
-    } else if (key === "enter") {
+    } else if (key.return) {
       // Handle Enter press (e.g., submit value)
       console.log("Enter pressed with value:", value);
       setValue("");
-    } else if (key === "backspace") {
+    } else if (key.backspace) {
       // Handle Backspace
       setValue((prev) => prev.slice(0, -1));
-    } else if (key.length === 1) {
+    } else if (input.length === 1) {
       // Handle regular printable characters
-      setValue((prev) => prev + key);
+      setValue((prev) => prev + input);
     }
   });
 
