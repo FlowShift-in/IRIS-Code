@@ -1,36 +1,27 @@
 import { Box, Text, useInput } from "ink";
-import React, { useState } from "react";
+import { useState } from "react";
 
-const InputLoop: React.FC = () => {
-  const [value, setValue] = useState("");
+const InputLoop = () => {
+  const [counter, setCounter] = useState<number>(0);
 
-  // Capture single key presses (not full lines)
   useInput((input, key) => {
-    if (key.escape) {
-      // Optionally clear input when Escape is pressed
-      setValue("");
-    } else if (key.return) {
-      // Handle Enter press (e.g., submit value)
-      console.log("Enter pressed with value:", value);
-      setValue("");
-    } else if (key.backspace) {
-      // Handle Backspace
-      setValue((prev) => prev.slice(0, -1));
-    } else if (input.length === 1) {
-      // Handle regular printable characters
-      setValue((prev) => prev + input);
+    if (key.ctrl && input === "c") {
+      process.exit(0);
+    }
+
+    if (input === "k") {
+      setCounter(counter + 1);
+    } else if (input === "j") {
+      setCounter(counter - 1);
     }
   });
 
   return (
-    <>
-      <Box>
-        <Text>Write something:</Text>
+    <Box flexDirection="column" margin={1}>
+      <Box borderStyle="round" flexDirection="row" paddingX={1}>
+        <Text color="white">{counter}</Text>
       </Box>
-      <Box>
-        <Text>{value}</Text>
-      </Box>
-    </>
+    </Box>
   );
 };
 
