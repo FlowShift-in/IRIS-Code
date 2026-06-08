@@ -1,52 +1,12 @@
 {
-  // ─── TSCONFIG.NODE.JSON ───────────────────────────────────────────────────────
-  // Compiles: bin/  +  src/agents/  +  src/cli/
-  // These are pure Node.js files — no JSX, no React, no browser APIs.
-  // Covers: CLI entry point, Commander setup, LangGraph agent graph,
-  //         tool executors, Supabase auth, model wrappers (Ollama + Gemini proxy).
-  //
-  // Build:  npx tsc -p tsconfig.node.json
-  // Watch:  npx tsc -p tsconfig.node.json --watch
-  // Dev:    npx tsx watch src/agents/graph.ts   (no compile step needed)
-  // ─────────────────────────────────────────────────────────────────────────────
   "extends": "./tsconfig.json",
 
   "compilerOptions": {
-    // ── I/O ──────────────────────────────────────────────────────────────────────
-    // rootDir must cover BOTH bin/ and src/ since we include both below.
-    // Setting rootDir to "." means:
-    //   bin/iris-code.ts   → dist/bin/iris-code.js
-    //   src/agents/graph.ts → dist/src/agents/graph.js
-    //   src/cli/chat.ts     → dist/src/cli/chat.js
     "rootDir": ".",
     "outDir": "./dist",
 
-    // ── Types ────────────────────────────────────────────────────────────────────
-    // Only include Node.js types. No DOM, no React.
-    // @types/node must be installed: npm i -D @types/node
     "types": ["node"]
-
-    // ── Node-specific ─────────────────────────────────────────────────────────────
-    // No JSX needed here — plain TypeScript only.
-    // jsx is intentionally omitted (inheriting nothing from base = no JSX).
-
-    // ── Paths (optional, add when needed) ────────────────────────────────────────
-    // "paths": {
-    //   "@agent/*": ["./src/agents/*"],
-    //   "@cli/*":   ["./src/cli/*"]
-    // }
   },
-
-  // ── What to compile ───────────────────────────────────────────────────────────
-  // bin/         → iris-code.ts (CLI entry, Commander, shebang)
-  // src/agents/  → graph.ts, tools.ts, memory.ts (LangGraph)
-  // src/cli/     → chat.ts, login.ts, credits.ts (headless command handlers)
-  //
-  // Excludes src/tui/ — that's handled by tsconfig.tui.json
   "include": ["bin", "src/agents", "src/cli"],
-  "exclude": [
-    "node_modules",
-    "dist",
-    "src/tui" // tui has JSX — compiled by tsconfig.tui.json
-  ]
+  "exclude": ["node_modules", "dist", "src/tui"]
 }
