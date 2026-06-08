@@ -1,4 +1,5 @@
 import { Box, Text, useInput } from "ink";
+import TextInput from "ink-text-input";
 import { useState } from "react";
 
 const InputBox = () => {
@@ -9,13 +10,13 @@ const InputBox = () => {
       process.exit(0);
     }
 
-    if (key.backspace || key.delete) {
-      setPrompt((prev) => prev.slice(0, -1));
-    }
+    // if (key.backspace || key.delete) {
+    //   setPrompt((prev) => prev.slice(0, -1));
+    // }
 
-    if (input && !key.return && !key.escape) {
-      setPrompt((prev) => prev + input);
-    }
+    // if (input && !key.return && !key.escape) {
+    //   setPrompt((prev) => prev + input);
+    // }
   });
 
   return (
@@ -36,7 +37,7 @@ const InputBox = () => {
           <Box marginRight={1}>
             <Text color={"blue"}>{">"}</Text>
           </Box>
-          <Text color={"cyan"}>{prompt}</Text>
+          <TextInput value={prompt} onChange={setPrompt} />
         </Box>
       </Box>
     </>
