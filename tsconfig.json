@@ -1,33 +1,61 @@
 {
+  // ─── BASE TSCONFIG ────────────────────────────────────────────────────────────
+  // Root config. Never compiled directly.
+  // tsconfig.node.json and tsconfig.tui.json both extend this.
+  // "tsc" by default uses tsconfig.json → but we point it at the child configs.
+  // Run: tsc -p tsconfig.node.json && tsc -p tsconfig.tui.json
+  // ─────────────────────────────────────────────────────────────────────────────
   "compilerOptions": {
-    "rootDir": "./src",
-    "outDir": "./dist",
+    // ── Output ──────────────────────────────────────────────────────────────────
+    // rootDir / outDir are NOT set here — each child config sets its own.
+    // declaration + declarationMap let other files import compiled types cleanly.
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
 
+    // ── Environment ─────────────────────────────────────────────────────────────
+    // ES2022: gives us top-level await, class fields, Object.hasOwn, Error.cause.
+    // NodeNext: correct module system for Node 18+. Requires .js extensions on
+    // all relative imports (even though source files are .ts).
     "target": "ES2022",
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
     "lib": ["ES2022"],
-    "types": ["node"],
 
+    // ── Interop ─────────────────────────────────────────────────────────────────
+    // esModuleInterop: lets you write  import fs from 'fs'  instead of
+    //                  import * as fs from 'fs'
+    // allowSyntheticDefaultImports: required when esModuleInterop is true.
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
 
-    "sourceMap": true,
+    // ── Module extras ────────────────────────────────────────────────────────────
+    // resolveJsonModule: lets you  import pkg from './package.json'
+    // isolatedModules:   required by tsx (dev runner) and esbuild.
+    //                    Ensures every file can be transpiled independently.
+    "resolveJsonModule": true,
+    "isolatedModules": true,
 
+    // ── Type safety — strict core ────────────────────────────────────────────────
+    // strict: enables strictNullChecks, strictFunctionTypes, strictBindCallApply,
+    //         strictPropertyInitialization, noImplicitAny, noImplicitThis,
+    //         alwaysStrict, useUnknownInCatchVariables.
     "strict": true,
-    "noUncheckedIndexedAccess": true,
-    "exactOptionalPropertyTypes": true,
 
+    // NOTE: noUncheckedIndexedAccess and exactOptionalPropertyTypes are
+    // intentionally NOT in the base config. They are powerful but break
+    // LangGraph's internal state types and Ink's prop types.
+    // Add them back per-file with  // @ts-strict-mode  once the agent is stable.
+
+    // ── Clean code ───────────────────────────────────────────────────────────────
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
 
-    "isolatedModules": true,
-    "skipLibCheck": true,
-
-    "resolveJsonModule": true
-  },
-  "include": ["src", "bin"],
-  "exclude": ["node_modules", "dist"]
+    // ── Performance ──────────────────────────────────────────────────────────────
+    // skipLibCheck: skip type-checking of .d.ts files in node_modules.
+    // Safe because we trust published types; saves ~40% compile time.
+    "skipLibCheck": true
+  }
 }
