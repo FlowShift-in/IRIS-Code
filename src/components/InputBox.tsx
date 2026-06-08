@@ -34,6 +34,7 @@ const InputBox = () => {
           </Box>
           <TextInput
             value={inputValue.prompt}
+            placeholder="Enter Your Prompt >>>"
             onChange={(value) => setInputValue({ prompt: value })}
           />
         </Box>
