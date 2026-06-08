@@ -4,7 +4,7 @@ import { useState } from "react";
 import InputType from "../types/input-type.js";
 
 const InputBox = () => {
-  const [prompt, setPrompt] = useState<InputType>({
+  const [inputValue, setInputValue] = useState<InputType>({
     prompt: "",
   });
 
@@ -33,8 +33,8 @@ const InputBox = () => {
             <Text color={"blue"}>{">"}</Text>
           </Box>
           <TextInput
-            value={prompt.prompt}
-            onChange={(value) => setPrompt({ prompt: value })}
+            value={inputValue.prompt}
+            onChange={(value) => setInputValue({ prompt: value })}
           />
         </Box>
       </Box>
