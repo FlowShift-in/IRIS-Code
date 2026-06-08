@@ -24,7 +24,7 @@ const InputBox = () => {
       <Box
         borderStyle="round"
         padding={1}
-        margin={1}
+        marginY={1}
         borderColor={"blue"}
         flexDirection={"column"}
         width={"100%"}
