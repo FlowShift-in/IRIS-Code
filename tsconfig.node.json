@@ -7,6 +7,24 @@
 
     "types": ["node"]
   },
-  "include": ["bin", "src/agents", "src/cli"],
-  "exclude": ["node_modules", "dist", "src/tui"]
+  "include": [
+    "bin",
+    "src/agents",
+    "src/cli",
+    "bin",
+    "src/hooks",
+    "src/services",
+    "src/tools",
+    "src/utils",
+    "src/types",
+    "src/config",
+    "src/commands"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "src/cli",
+    "src/components",
+    "src/screens"
+  ]
 }
