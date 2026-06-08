@@ -2,8 +2,8 @@
   "extends": "./tsconfig.json",
 
   "compilerOptions": {
-    "rootDir": "./src/tui",
-    "outDir": "./dist/src/tui",
+    "rootDir": "./src/cli",
+    "outDir": "./dist/src/cli",
     "jsx": "react-jsx",
     "jsxImportSource": "react",
 
@@ -12,6 +12,6 @@
     "lib": ["ES2022"]
   },
 
-  "include": ["src/tui"],
+  "include": ["src/cli", "components"],
   "exclude": ["node_modules", "dist", "src/agents", "src/cli", "bin"]
 }
