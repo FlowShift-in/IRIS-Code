@@ -13,11 +13,5 @@
   },
 
   "include": ["src/tui"],
-  "exclude": [
-    "node_modules",
-    "dist",
-    "src/agents", // node-only — no JSX
-    "src/cli", // node-only — no JSX
-    "bin" // entry point — no JSX
-  ]
+  "exclude": ["node_modules", "dist", "src/agents", "src/cli", "bin"]
 }
