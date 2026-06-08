@@ -1,3 +1,6 @@
 #!/usr/bin/env node
 process.env.NODE_NO_WARNINGS = "1";
 
+export const IrisCode = ()=>{
+    
+}
