@@ -1,9 +1,12 @@
 import { Box, Text, useInput } from "ink";
 import TextInput from "ink-text-input";
 import { useState } from "react";
+import InputType from "../types/input-type.js";
 
 const InputBox = () => {
-  const [prompt, setPrompt] = useState("");
+  const [prompt, setPrompt] = useState<InputType>({
+    prompt: "",
+  });
 
   useInput((input, key) => {
     if ((key.ctrl && input.toLowerCase() === "c") || key.escape) {
@@ -29,7 +32,10 @@ const InputBox = () => {
           <Box marginRight={1}>
             <Text color={"blue"}>{">"}</Text>
           </Box>
-          <TextInput value={prompt} onChange={setPrompt} />
+          <TextInput
+            value={prompt.prompt}
+            onChange={(value) => setPrompt({ prompt: value })}
+          />
         </Box>
       </Box>
     </>
