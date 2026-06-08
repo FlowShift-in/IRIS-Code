@@ -1,0 +1,30 @@
+{
+  "extends": "./tsconfig.json",
+
+  "compilerOptions": {
+    "rootDir": "./src/cli",
+    "outDir": "./dist/src/cli",
+    "jsx": "react-jsx",
+    "jsxImportSource": "react",
+
+    "types": ["node", "react"],
+
+    "lib": ["ES2022"]
+  },
+
+  "include": ["src/cli", "src/components", "src/screens"],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "src/agents",
+    "src/cli",
+    "bin",
+    "src/hooks",
+    "src/services",
+    "src/tools",
+    "src/utils",
+    "src/types",
+    "src/config",
+    "src/commands"
+  ]
+}

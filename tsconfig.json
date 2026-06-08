@@ -1,33 +1,30 @@
 {
   "compilerOptions": {
-    "rootDir": "./src",
-    "outDir": "./dist",
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
 
     "target": "ES2022",
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
     "lib": ["ES2022"],
-    "types": ["node"],
+
+    "jsx": "react-jsx",
+    "jsxImportSource": "react",
 
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
 
-    "sourceMap": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
 
     "strict": true,
-    "noUncheckedIndexedAccess": true,
-    "exactOptionalPropertyTypes": true,
 
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
 
-    "isolatedModules": true,
-    "skipLibCheck": true,
-
-    "resolveJsonModule": true
-  },
-  "include": ["src", "bin"],
-  "exclude": ["node_modules", "dist"]
+    "skipLibCheck": true
+  }
 }
