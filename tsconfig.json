@@ -22,6 +22,11 @@
     "moduleResolution": "NodeNext",
     "lib": ["ES2022"],
 
+    // ── JSX ──────────────────────────────────────────────────────────────────────
+    // react-jsx: uses the automatic JSX runtime (React 17+ / React 19).
+    "jsx": "react-jsx",
+    "jsxImportSource": "react",
+
     // ── Interop ─────────────────────────────────────────────────────────────────
     // esModuleInterop: lets you write  import fs from 'fs'  instead of
     //                  import * as fs from 'fs'
