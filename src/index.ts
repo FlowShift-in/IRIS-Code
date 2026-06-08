@@ -1,5 +1,5 @@
-import { render } from "ink";
-import React from "react";
-import InputLoop from "./tui/InputLoop.js";
+const index = () => {
+  console.log("Hello World");
+};
 
-render(React.createElement(InputLoop));
+index();
