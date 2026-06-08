@@ -1,4 +1,4 @@
-import { useInput } from "ink";
+import { Box, Text, useInput } from "ink";
 import React, { useState } from "react";
 
 const InputLoop: React.FC = () => {
@@ -22,7 +22,16 @@ const InputLoop: React.FC = () => {
     }
   });
 
-  return <div>InputLoop: {value}</div>;
+  return (
+    <>
+      <Box>
+        <Text>Write something:</Text>
+      </Box>
+      <Box>
+        <Text>{value}</Text>
+      </Box>
+    </>
+  );
 };
 
 export default InputLoop;
