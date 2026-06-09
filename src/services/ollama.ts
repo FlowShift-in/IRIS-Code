@@ -1,31 +1,19 @@
-import axios from "axios";
+"use strict";
 
-const checkOllamaStatus = async () => {
-  const url = "http://localhost:11434";
+import { Ollama } from "ollama";
 
+function createClient() {
+  return new Ollama({ host: "http://127.0.0.1:11434" });
+}
+
+async function checkConnection() {
   try {
-    const res = await axios.get(url);
-
-    console.log(res);
-
-    if (res.status === 200) {
-      return true;
-    } else {
-      return false;
-    }
-  } catch (error: any) {
-    console.log(error.message);
-    return error;
+    const ollama = createClient();
+    await ollama.list();
+    return true;
+  } catch {
+    return false;
   }
-};
+}
 
-const OllamaRunning = async () => {
-  const status = await checkOllamaStatus();
-
-  if (!status) {
-    console.log("Ollama is not running");
-    process.exit(1);
-  }
-};
-
-export { checkOllamaStatus, OllamaRunning };
+export { checkConnection };

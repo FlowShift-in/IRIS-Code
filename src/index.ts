@@ -1,5 +1,5 @@
 import App from "./components/App.js";
-import { checkOllamaStatus } from "./services/ollama.js";
+import { checkConnection } from "./services/ollama.js";
 
 const index = async () => {
   console.clear();
@@ -7,14 +7,18 @@ const index = async () => {
   console.log("----------------------------------");
   console.log("");
 
-  const status = await checkOllamaStatus();
+  const ollamaStatus = async () => {
+    const status = await checkConnection();
 
-  if (!status) {
-    console.log("Ollama is not running");
-    return;
-  }
+    if (status) {
+      App();
+    } else {
+      console.log("Ollama isn't Running :(");
+      return;
+    }
+  };
 
-  App();
+  ollamaStatus();
 };
 
 index();
