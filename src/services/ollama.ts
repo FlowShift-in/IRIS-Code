@@ -6,6 +6,8 @@ const checkOllamaStatus = async () => {
   try {
     const res = await axios.get(url);
 
+    console.log(res);
+
     if (res.status === 200) {
       return true;
     } else {

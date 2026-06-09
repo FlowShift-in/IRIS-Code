@@ -7,11 +7,12 @@ const index = async () => {
   console.log("----------------------------------");
   console.log("");
 
-  const OllamaStatus = async () => {
-    const status = await checkOllamaStatus();
-  };
+  const status = await checkOllamaStatus();
 
-  OllamaStatus();
+  if (!status) {
+    console.log("Ollama is not running");
+    return;
+  }
 
   App();
 };
