@@ -1,28 +1,26 @@
+import axios from "axios";
+
 const checkOllamaStatus = async () => {
   const url = "http://localhost:11434";
 
   try {
-    const res = await fetch(url, { method: "GET" });
-    console.log("Ollama is running");
+    const res = await axios.get(url);
 
-    if (res.ok) {
-      return "Ollama is running";
+    if (res.status === 200) {
+      return true;
     } else {
-      return "Ollama is not running";
+      return false;
     }
-  } catch (error) {
-    console.log(error);
-    console.log("Ollama is not running because of this error ", error);
-    return "Ollama is not running";
+  } catch (error: any) {
+    console.log(error.message);
+    return error;
   }
 };
 
 const OllamaRunning = async () => {
   const status = await checkOllamaStatus();
 
-  if (status) {
-    console.log("Ollama is running");
-  } else {
+  if (!status) {
     console.log("Ollama is not running");
     process.exit(1);
   }
