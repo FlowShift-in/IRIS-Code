@@ -16,4 +16,9 @@ const checkOllamaStatus = async () => {
   }
 };
 
-export { checkOllamaStatus };
+const OllamaRunning = async () => {
+  const status = await checkOllamaStatus();
+  return status;
+};
+
+export { checkOllamaStatus, OllamaRunning };
