@@ -1,3 +1,4 @@
+import "./config/env.js";
 import App from "./components/App.js";
 import { checkConnection } from "./services/ollama.js";
 
