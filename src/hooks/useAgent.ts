@@ -16,4 +16,4 @@ const savePrompt = ({ prompt }: { prompt: string }) => {
   });
 };
 
-export { savePrompt };
+export default savePrompt;
