@@ -8,6 +8,8 @@ const InputBox = () => {
     prompt: "",
   });
 
+  const sendPrompt = () => {};
+
   useInput((input, key) => {
     if ((key.ctrl && input.toLowerCase() === "c") || key.escape) {
       process.exit(0);
