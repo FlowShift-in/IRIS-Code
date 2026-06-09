@@ -18,7 +18,13 @@ const checkOllamaStatus = async () => {
 
 const OllamaRunning = async () => {
   const status = await checkOllamaStatus();
-  return status;
+
+  if (status) {
+    console.log("Ollama is running");
+  } else {
+    console.log("Ollama is not running");
+    process.exit(1);
+  }
 };
 
 export { checkOllamaStatus, OllamaRunning };
