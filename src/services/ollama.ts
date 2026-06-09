@@ -11,6 +11,7 @@ const checkOllamaStatus = async () => {
       return "Ollama is not running";
     }
   } catch (error) {
+    console.log(error);
     console.log("Ollama is not running because of this error ", error);
     return "Ollama is not running";
   }
